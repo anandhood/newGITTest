@@ -1,0 +1,5 @@
+customerID s = iCD
+firstName s = iFNAME
+lastName s = iLNAME
+address.street = iADDRS.iST
+address.city = iADDRS.iCT

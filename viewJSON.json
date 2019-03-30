@@ -1,0 +1,27 @@
+{
+  "customerId": "",
+  "firstName": "",
+  "LastName": "",
+  "customerType": "",
+  "address": [
+    {
+      "street": "",
+      "city": "",
+      "state": "",
+      "zip": "",
+      "coutry": ""
+    }
+  ],
+  "Phone": [
+    {
+      "type": "",
+      "number": ""
+    }
+  ],
+  "email": [
+    {
+      "type": "",
+      "emailAddress": ""
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "iCID": "33AABB001",
+  "iFNAME": "Shrinivas",
+  "iLNME": "Allurkar",
+  "iCTYPE": "INSURED",
+  "iADDRS": [
+    {
+      "iST": "555 E California Ave",
+      "iCT": "Sunnyvale",
+      "iSTE": "CA",
+      "iZP": "94086",
+      "iCNTRY": "US"
+    },
+    {
+      "iST": "555 E FAIR OAK",
+      "iCT": "Sunnyvale",
+      "iSTE": "CA",
+      "iZP": "94086",
+      "iCNTRY": "US"
+    }
+  ],
+  "iPH": [
+    {
+      "iTYP": "HOME",
+      "iNUMBER": "4084540000"
+    },
+    {
+      "iTYP": "work",
+      "iNUMBER": "4084540001"
+    }
+  ],
+  "email": [
+    {
+      "iTYP": "WORK",
+      "iEADDRESS": "ARCHITECT@WORK.COM"
+    },
+    {
+      "iTYP": "HOME",
+      "iEADDRESS": "ARCHITECT@HOME.COM"
+    }
+  ]
+}
