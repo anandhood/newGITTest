@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Convert JSON Data to HTML Table</title>
+    <style>
+        th, td, p, input {
+            font:14px Verdana;
+        }
+        table, th, td 
+        {
+            border: solid 1px #DDD;
+            border-headerlapse: headerlapse;
+            padding: 2px 3px;
+            text-align: center;
+        }
+        th {
+            font-weight:bold;
+        }
+    </style>
+    <script type = "text/javascript" src = "./data.js"></script>
+</head>
+<body>
+    <input type="button"  value="Other Party JSON Structure" onclick="console.clear();showThirdPartyJSON();"/> <br/><br/>
+    <input type="button"  value="Design Input Form" onclick="console.clear();outputView('blank');"/> <br/><br/>    
+    <input type="button"  value="Map Fields" onclick="showMapping();"/> <br/><br/>
+    <input type="button"  value="Enter Data" onclick="console.clear();outputView('dataEntered');"/> <br/><br/>
+    
+    <input type="button"  value="CreateJSON" onclick="showMapping();generateJSONOutput();"/>
+    
+    <p id="showData"></p>
+</body>
+
+<script>	
+	//console.dir(mapping);
+	//console.dir(data);
+	//console.dir(view);
+
+	var viewJSON = JSON.parse(view);
+	var mappingJSON = JSON.parse(mapping);
+	var dataJSON = JSON.parse(data);
+	var thirdPartyJSON = JSON.parse(thirdPartyJSONStructure);
+	
+	/* console.log('Data');
+	console.dir(dataJSON);
+	console.log('Mapping');
+	console.dir(mappingJSON);
+
+	console.log('View');	
+	console.dir(viewJSON);	*/
+
+	console.log('--- Fun starts here ---');
+
+	var outputJSON = {};
+
+	function showThirdPartyJSON(){
+		console.log('---- Third Party Payload Structure ----- ');
+		console.log(thirdPartyJSON);
+	}
+
+	function showMapping(){
+		console.log('--------------- mapping --------------- ');
+		console.log(mappingJSON);
+	}
+	//outputView("blank");
+
+	function outputView(viewType){ 
+		console.log('------------ form input ------------------');
+
+		for(var key in mappingJSON){
+			if(mappingJSON.hasOwnProperty(key)){
+				if(key !== 'table'){
+					//console.log(key + '--> ' + mappingJSON[key]);
+					var datakey =  mappingJSON[key];
+					if(viewType === 'blank'){
+						console.log('aura:'+firstLetterUpper(key)  + ' - ' );
+					}
+					if(viewType === 'dataEntered'){
+						console.log(firstLetterUpper(key)  + ' - ' + dataJSON[datakey]);
+						outputJSON[mappingJSON[key]] = dataJSON[datakey];
+					}
+				}
+			}
+		}
+
+
+
+		console.log('------------- table  -------------------');		
+
+		var tableMapping = mappingJSON['table'];
+		var viewLayerTable = tableMapping['sourcetable'];
+		//console.log('viewLayerTableName: ' + viewLayerTable);
+		var inputTable = tableMapping['desttable'];
+		var columnMapping = tableMapping['col'];
+		var dataTable = dataJSON[inputTable];
+		//console.dir(dataTable);
+
+		if(viewType === 'blank'){
+			for(col in columnMapping){
+				console.log('aura:'+col);
+			}
+		}
+
+	if(viewType === 'dataEntered'){	
+		var jsonTable = [];	
+		for(rowIndex in dataTable){
+			var rowJSON = {}
+			//console.dir(dataTable[rowIndex]);
+			console.log(' >  Row #' + rowIndex )
+			var row = dataTable[rowIndex];
+			for(var col in columnMapping){
+					console.log(firstLetterUpper(col) + ' - ' + row[columnMapping[col]]);	
+					rowJSON[columnMapping[col]] = row[columnMapping[col]];
+			}
+			//console.log('rowIndex: ' + rowIndex);
+			jsonTable[rowIndex] = rowJSON;	
+
+		}
+		outputJSON[inputTable] = jsonTable;
+		//console.log(jsonTable);
+	}
+
+	if(viewType === 'dataEntered'){	
+		console.log('                   [Save]');
+	}
+
+	//console.log(outputJSON);
+}
+
+function firstLetterUpper(string) 
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function generateJSONOutput(){
+	console.log('---- Request body ----- ');
+	console.log(outputJSON);
+}
+
+</script>
+</html>
